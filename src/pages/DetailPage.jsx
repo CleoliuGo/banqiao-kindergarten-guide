@@ -1,6 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 import { kindergartens, homes } from "../data/kindergartens";
 
+const TYPE_LABELS = {
+  public: "公立",
+  nonprofit: "非營利",
+  subsidized: "準公共",
+};
+
 export function DetailPage() {
   const { slug } = useParams();
   const school = kindergartens.find((item) => item.slug === slug);
@@ -36,7 +42,7 @@ export function DetailPage() {
           </div>
           <div>
             <span>類型</span>
-            <strong>{school.type}</strong>
+            <strong>{TYPE_LABELS[school.type] ?? school.type}</strong>
           </div>
         </div>
       </section>

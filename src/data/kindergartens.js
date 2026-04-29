@@ -320,6 +320,14 @@ export const kindergartens = [
     ],
     sourceNote: "缺額與實際班型需向園方確認。",
   },
-];
+].map((school) => {
+  const nearestKey =
+    school.distance.guanyun.km <= school.distance.champagne.km ? "guanyun" : "champagne";
+
+  return {
+    ...school,
+    nearestKey,
+  };
+});
 
 export { homes };
