@@ -12,7 +12,9 @@ export function KindergartenCard({ school, onFocus, basis }) {
       ? school.distance.guanyun
       : basis === "champagne"
         ? school.distance.champagne
-        : school.distance[school.nearestKey];
+        : school.nearestKey
+          ? school.distance[school.nearestKey]
+          : { km: null, transport: "尚未補距離，請先開地圖確認。" };
 
   const basisLabel =
     basis === "guanyun" ? "觀雲家" : basis === "champagne" ? "香檳家" : school.closestHome.label;
@@ -41,13 +43,13 @@ export function KindergartenCard({ school, onFocus, basis }) {
         </div>
         <div>
           <span>{basisLabel}</span>
-          <strong>{basisDistance.km} km</strong>
+          <strong>{basisDistance.km == null ? "待補" : `${basisDistance.km} km`}</strong>
         </div>
       </div>
 
       <div className="distance-pills">
-        <span>觀雲家 {school.distance.guanyun.km} km</span>
-        <span>香檳家 {school.distance.champagne.km} km</span>
+        <span>觀雲家 {school.distance.guanyun.km == null ? "待補" : `${school.distance.guanyun.km} km`}</span>
+        <span>香檳家 {school.distance.champagne.km == null ? "待補" : `${school.distance.champagne.km} km`}</span>
       </div>
 
       <p className="card__text">{school.pickSummary}</p>

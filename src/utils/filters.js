@@ -1,13 +1,16 @@
 function getDistanceByBasis(school, basis) {
+  const guanyunDistance = school.distance.guanyun.km ?? Number.POSITIVE_INFINITY;
+  const champagneDistance = school.distance.champagne.km ?? Number.POSITIVE_INFINITY;
+
   if (basis === "guanyun") {
-    return school.distance.guanyun.km;
+    return guanyunDistance;
   }
 
   if (basis === "champagne") {
-    return school.distance.champagne.km;
+    return champagneDistance;
   }
 
-  return Math.min(school.distance.guanyun.km, school.distance.champagne.km);
+  return Math.min(guanyunDistance, champagneDistance);
 }
 
 function getVacancyScore(school) {

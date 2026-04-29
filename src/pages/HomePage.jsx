@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FilterBar } from "../components/FilterBar";
 import { KindergartenCard } from "../components/KindergartenCard";
 import { MapPanel } from "../components/MapPanel";
-import { OfficialVacancyTable } from "../components/OfficialVacancyTable";
 import { kindergartens, homes } from "../data/kindergartens";
 import { officialVacancyDate } from "../data/officialVacancies";
 import { filterKindergartens } from "../utils/filters";
@@ -55,8 +54,8 @@ export function HomePage() {
           <p className="eyebrow">Banqiao Kindergarten Guide</p>
           <h1>給家人看的板橋幼兒園抽籤小幫手</h1>
           <p className="hero-card__text">
-            參考你提供的資訊站做法，改成更容易快速比對的清單頁。上半部先看精選園所的距離、
-            缺額、接送與評價，下半部保留板橋區官方缺額總表。
+            參考你提供的資訊站做法，現在首頁主清單直接放全部板橋區官方缺額園所，再把已整理到的
+            地址、距離、接送與家長判斷重點疊上去。
           </p>
           <div className="hero-card__chips">
             <span>公立</span>
@@ -69,7 +68,7 @@ export function HomePage() {
             <Link className="primary-button" to="/guide">
               看選園指南
             </Link>
-            <a href="#official-vacancy">直接看官方缺額</a>
+            <a href="#all-schools">直接看全部園所</a>
           </div>
         </div>
         <aside className="hero-card__aside">
@@ -113,12 +112,12 @@ export function HomePage() {
         </aside>
 
         <div className="browse-layout__main">
-          <section className="section-head">
+          <section className="section-head" id="all-schools">
             <div>
-              <p className="section-kicker">精選園所</p>
-              <h2>先看你們家比較常會真的考慮的幾間</h2>
+              <p className="section-kicker">全部園所</p>
+              <h2>所有官方缺額園所都進同一份清單判斷</h2>
             </div>
-            <p className="note-text">可依觀雲家、香檳家或兩者最近距離來排序。</p>
+            <p className="note-text">距離已補的會直接排序，尚未補距離的會先排在後面。</p>
           </section>
 
           <section className="card-list">
@@ -132,10 +131,6 @@ export function HomePage() {
             ))}
           </section>
         </div>
-      </section>
-
-      <section id="official-vacancy">
-        <OfficialVacancyTable />
       </section>
 
       <MapPanel school={focusedSchool} onClose={() => setFocusedSchool(null)} />

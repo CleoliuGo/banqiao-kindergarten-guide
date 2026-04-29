@@ -3,7 +3,9 @@ export function MapPanel({ school, onClose }) {
     return null;
   }
 
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(school.address)}&output=embed`;
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+    school.address.startsWith("待補地址") ? school.name : school.address,
+  )}&output=embed`;
 
   return (
     <div className="map-drawer">

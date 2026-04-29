@@ -1,3 +1,5 @@
+import { officialVacancies } from "./officialVacancies";
+
 const homes = {
   guanyun: {
     label: "觀雲家",
@@ -9,16 +11,18 @@ const homes = {
   },
 };
 
-export const kindergartens = [
+const TYPE_MAP = {
+  "01": { type: "public", typeLabel: "公立" },
+  "02": { type: "public", typeLabel: "公立附幼" },
+  "04": { type: "public", typeLabel: "公立附幼" },
+  "07": { type: "nonprofit", typeLabel: "非營利" },
+};
+
+const manualDetails = [
   {
-    slug: "banqiao-elementary-kindergarten",
     name: "新北市板橋區板橋國民小學附設幼兒園",
-    type: "public",
-    vacancy: "3-5歲班 66",
     address: "新北市板橋區文化路一段23號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市板橋區板橋國民小學附設幼兒園",
     rating: 4.5,
-    closestHome: { label: "觀雲家" },
     distance: {
       guanyun: {
         km: 1.1,
@@ -39,17 +43,12 @@ export const kindergartens = [
       "問清楚延托、寒暑假與請假退費規則。",
       "若重視戶外空間，實地看一次活動場域大小與動線。",
     ],
-    sourceNote: "地址參考幼兒園公開資訊站；缺額以 2026-04-29 新北幼生登記平台公開資料整理。",
+    sourceNote: "地址參考公開幼兒園資訊站；缺額以 2026-04-29 新北幼生登記平台公開資料整理。",
   },
   {
-    slug: "banqiao-municipal-kindergarten",
     name: "新北市立板橋幼兒園",
-    type: "public",
-    vacancy: "3-5歲班 33；新民分班 27；和平分班 32",
     address: "新北市板橋區公館街220號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市立板橋幼兒園",
     rating: 4.4,
-    closestHome: { label: "觀雲家" },
     distance: {
       guanyun: {
         km: 1.9,
@@ -70,17 +69,12 @@ export const kindergartens = [
       "上下學動線是否好臨停。",
       "抽中後是否需要額外準備交通備案。",
     ],
-    sourceNote: "園名與地址依公開資訊整理，缺額待補 4/29 官方公告。",
+    sourceNote: "園名與地址依公開資訊整理。",
   },
   {
-    slug: "shijian-elementary-kindergarten",
     name: "新北市板橋區實踐國民小學附設幼兒園",
-    type: "public",
-    vacancy: "2歲專班 14；3-5歲班 71",
-    address: "新北市板橋區實踐路93號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市板橋區實踐國民小學附設幼兒園",
+    address: "新北市板橋區實踐路93巷51號",
     rating: 4.5,
-    closestHome: { label: "觀雲家" },
     distance: {
       guanyun: {
         km: 1.6,
@@ -101,17 +95,12 @@ export const kindergartens = [
       "大門管制與家長接送窗口。",
       "是否有兄弟姊妹同校的接送便利。",
     ],
-    sourceNote: "缺額、收托年齡與延托安排請以園方及教育局公告為準。",
+    sourceNote: "地址參考公開幼兒園資訊站；缺額以官方資料整理。",
   },
   {
-    slug: "haishan-elementary-kindergarten",
     name: "新北市板橋區海山國民小學附設幼兒園",
-    type: "public",
-    vacancy: "3-5歲班 33",
     address: "新北市板橋區漢生東路280號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市板橋區海山國民小學附設幼兒園",
     rating: 4.3,
-    closestHome: { label: "香檳家" },
     distance: {
       guanyun: {
         km: 3.0,
@@ -135,14 +124,9 @@ export const kindergartens = [
     sourceNote: "評價為公開網路口碑整理值，非官方數據。",
   },
   {
-    slug: "jiangcui-elementary-kindergarten",
     name: "新北市板橋區江翠國民小學附設幼兒園",
-    type: "public",
-    vacancy: "2歲專班 28；3-5歲班 17",
     address: "新北市板橋區文化路二段413號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市板橋區江翠國民小學附設幼兒園",
     rating: 4.4,
-    closestHome: { label: "香檳家" },
     distance: {
       guanyun: {
         km: 4.4,
@@ -157,23 +141,18 @@ export const kindergartens = [
     tuition: "公立收費。",
     teachingModel: "生活常規與主題活動兼具，校園附幼口碑穩定。",
     pickupNotes: "文化路車流量高，不建議最後一刻壓線接送。",
-    pickSummary: "學區名聲穩，但對南雅南路兩個出發點來說距離稍遠。",
+    pickSummary: "學區名聲穩，但對南雅南路兩個住家點來說距離稍遠。",
     parentChecklist: [
       "若雙薪家庭，延托與祖父母支援是否足夠。",
       "上下課尖峰車流能否承受。",
       "是否真的符合家庭長期動線。",
     ],
-    sourceNote: "缺額待補，距離為站內估算。",
+    sourceNote: "距離為站內估算。",
   },
   {
-    slug: "daguan-nonprofit-kindergarten",
     name: "新北市大觀非營利幼兒園",
-    type: "nonprofit",
-    vacancy: "2歲專班 15；3-5歲班 16",
     address: "新北市板橋區大觀路一段30號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市大觀非營利幼兒園",
     rating: 4.6,
-    closestHome: { label: "觀雲家" },
     distance: {
       guanyun: {
         km: 1.3,
@@ -194,17 +173,12 @@ export const kindergartens = [
       "老師流動率與班級穩定度。",
       "家長參與活動頻率是否符合家庭時間。",
     ],
-    sourceNote: "缺額待補 4/29 公告，評價為公開口碑整理。",
+    sourceNote: "評價為公開口碑整理。",
   },
   {
-    slug: "xinyue-nonprofit-kindergarten",
     name: "新北市新月非營利幼兒園",
-    type: "nonprofit",
-    vacancy: "2歲專班 60；3-5歲班 32",
     address: "新北市板橋區中山路二段255巷72號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市新月非營利幼兒園",
     rating: 4.5,
-    closestHome: { label: "香檳家" },
     distance: {
       guanyun: {
         km: 2.8,
@@ -228,14 +202,9 @@ export const kindergartens = [
     sourceNote: "教學模式為公開介紹與常見家長觀察整理。",
   },
   {
-    slug: "bo-cui-nonprofit-kindergarten",
     name: "新北市柏翠非營利幼兒園",
-    type: "nonprofit",
-    vacancy: "2歲專班 15；3-5歲班 27",
     address: "新北市板橋區溪頭街121號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市柏翠非營利幼兒園",
     rating: 4.4,
-    closestHome: { label: "香檳家" },
     distance: {
       guanyun: {
         km: 4.2,
@@ -259,14 +228,9 @@ export const kindergartens = [
     sourceNote: "距離為站內估算值。",
   },
   {
-    slug: "tsuei-jung-nonprofit-kindergarten",
     name: "新北市翠中非營利幼兒園",
-    type: "nonprofit",
-    vacancy: "3-5歲班 23",
     address: "新北市板橋區文化路二段346號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市翠中非營利幼兒園",
     rating: 4.3,
-    closestHome: { label: "香檳家" },
     distance: {
       guanyun: {
         km: 4.6,
@@ -287,17 +251,15 @@ export const kindergartens = [
       "接送人與備援人力安排。",
       "若抽中後能否持續至少一年以上穩定接送。",
     ],
-    sourceNote: "缺額待補，評價屬非官方整理。",
+    sourceNote: "評價屬非官方整理。",
   },
   {
-    slug: "daton-subsidized-kindergarten",
     name: "新北市私立大同幼兒園",
     type: "subsidized",
-    vacancy: null,
+    typeLabel: "準公共",
     address: "新北市板橋區大同街35巷2號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市私立大同幼兒園",
     rating: 4.2,
-    closestHome: { label: "觀雲家" },
+    vacancy: null,
     distance: {
       guanyun: {
         km: 2.1,
@@ -321,14 +283,12 @@ export const kindergartens = [
     sourceNote: "收費模式需實際向園方確認。",
   },
   {
-    slug: "tijia-bao-subsidized-kindergarten",
     name: "新北市私立緹家寶幼兒園",
     type: "subsidized",
-    vacancy: null,
+    typeLabel: "準公共",
     address: "新北市板橋區館前西路158之8號",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市私立緹家寶幼兒園",
     rating: 4.1,
-    closestHome: { label: "觀雲家" },
+    vacancy: null,
     distance: {
       guanyun: {
         km: 1.7,
@@ -351,14 +311,155 @@ export const kindergartens = [
     ],
     sourceNote: "缺額與實際班型需向園方確認。",
   },
-].map((school) => {
+];
+
+function normalizeName(name) {
+  return name.replace(/[（(].*?[)）]/g, "").replace(/\s+/g, "").trim();
+}
+
+function slugify(text) {
+  return encodeURIComponent(text).toLowerCase();
+}
+
+function formatVacancy(row) {
+  const parts = [];
+
+  if (row.vacancy2yo != null) {
+    parts.push(`2歲專班 ${row.vacancy2yo}`);
+  }
+
+  if (row.vacancy35 != null) {
+    parts.push(`3-5歲班 ${row.vacancy35}`);
+  }
+
+  return parts.length ? parts.join("；") : null;
+}
+
+function getDefaultDistance() {
+  return {
+    guanyun: {
+      km: null,
+      transport: "尚未整理固定路線，建議直接開 Google Maps 用上學時段試算。",
+    },
+    champagne: {
+      km: null,
+      transport: "尚未整理固定路線，建議直接開 Google Maps 用放學時段試算。",
+    },
+  };
+}
+
+function getDefaultChecklist(typeLabel) {
+  if (typeLabel === "非營利") {
+    return [
+      "先問寒暑假、延托與家長參與活動的安排。",
+      "確認老師穩定度與班級照顧節奏。",
+      "看巷弄接送是否真的能長期負擔。",
+    ];
+  }
+
+  if (typeLabel === "準公共") {
+    return [
+      "補助後實繳金額與額外收費要拆開看。",
+      "確認早托、晚托與請假退費規則。",
+      "教學內容是否過度才藝化，要和家庭期待一致。",
+    ];
+  }
+
+  return [
+    "確認延托、寒暑假與臨停接送動線。",
+    "校園附幼要特別看國小上下學尖峰車流。",
+    "抽中率不是全部，長期接送成本更重要。",
+  ];
+}
+
+function getDefaultSummary(typeLabel, name) {
+  if (typeLabel === "非營利") {
+    return `${name} 屬非營利體系，建議把收費、接送與家園合作節奏一起評估。`;
+  }
+
+  if (typeLabel === "準公共") {
+    return `${name} 可作為抽籤外的務實備案，重點是補助後實繳與接送彈性。`;
+  }
+
+  return `${name} 屬公立或公立附幼，建議優先確認距離、延托與上下學動線。`;
+}
+
+const manualMap = new Map(
+  manualDetails.map((item) => [
+    normalizeName(item.name),
+    item,
+  ]),
+);
+
+const mergedOfficialSchools = officialVacancies.map((row) => {
+  const baseName = normalizeName(row.name);
+  const detail = manualMap.get(baseName);
+  const typeInfo = TYPE_MAP[row.eduMod] ?? { type: "public", typeLabel: "公立" };
+  const name = row.subname ? `${row.name} ${row.subname}` : row.name;
+  const distance = detail?.distance ?? getDefaultDistance();
   const nearestKey =
-    school.distance.guanyun.km <= school.distance.champagne.km ? "guanyun" : "champagne";
+    distance.guanyun.km == null || distance.champagne.km == null
+      ? null
+      : distance.guanyun.km <= distance.champagne.km
+        ? "guanyun"
+        : "champagne";
+  const closestHome = nearestKey ? homes[nearestKey] : { label: "待補" };
 
   return {
-    ...school,
+    slug: detail?.slug ?? slugify(`${row.schno}-${name}`),
+    name,
+    shortName: row.name,
+    subname: row.subname,
+    schno: row.schno,
+    phone: row.phone,
+    type: detail?.type ?? typeInfo.type,
+    typeLabel: detail?.typeLabel ?? typeInfo.typeLabel,
+    vacancy: formatVacancy(row),
+    address: detail?.address ?? "待補地址，請先用 Google Map 搜尋園名確認。",
+    mapUrl: row.mapUrl,
+    rating: detail?.rating ?? null,
+    distance,
     nearestKey,
+    closestHome,
+    schoolHours: detail?.schoolHours ?? "官方缺額資料未附作息，請以園方公告為準。",
+    tuition:
+      detail?.tuition ??
+      (typeInfo.typeLabel === "非營利"
+        ? "非營利收費通常介於公立與私幼之間，實際請向園方確認。"
+        : "公立或附幼收費通常較低，實際項目請向園方確認。"),
+    teachingModel:
+      detail?.teachingModel ??
+      "目前尚未補到完整教學介紹，建議先確認生活常規、戶外活動與家長溝通方式。",
+    pickupNotes:
+      detail?.pickupNotes ??
+      "尚未補到固定接送筆記，建議在上下學尖峰時段親自走一次路線。",
+    pickSummary: detail?.pickSummary ?? getDefaultSummary(typeInfo.typeLabel, row.name),
+    parentChecklist: detail?.parentChecklist ?? getDefaultChecklist(typeInfo.typeLabel),
+    sourceNote:
+      detail?.sourceNote ??
+      "缺額與電話來自 2026-04-29 新北幼生登記平台公開資料；其他欄位待補時請以園方資訊為準。",
   };
 });
+
+const supplementalSchools = manualDetails
+  .filter((item) => item.type === "subsidized")
+  .map((school) => {
+    const nearestKey =
+      school.distance.guanyun.km <= school.distance.champagne.km ? "guanyun" : "champagne";
+
+    return {
+      slug: slugify(school.name),
+      shortName: school.name,
+      subname: "",
+      schno: "",
+      phone: "",
+      mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(school.name)}`,
+      ...school,
+      nearestKey,
+      closestHome: homes[nearestKey],
+    };
+  });
+
+export const kindergartens = [...mergedOfficialSchools, ...supplementalSchools];
 
 export { homes };

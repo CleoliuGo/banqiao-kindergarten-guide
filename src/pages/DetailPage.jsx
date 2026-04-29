@@ -42,7 +42,7 @@ export function DetailPage() {
           </div>
           <div>
             <span>類型</span>
-            <strong>{TYPE_LABELS[school.type] ?? school.type}</strong>
+            <strong>{school.typeLabel ?? TYPE_LABELS[school.type] ?? school.type}</strong>
           </div>
         </div>
       </section>
@@ -53,13 +53,13 @@ export function DetailPage() {
           <div className="route-block">
             <strong>{homes.guanyun.label}</strong>
             <p>{homes.guanyun.address}</p>
-            <p>距離約 {school.distance.guanyun.km} km</p>
+            <p>距離約 {school.distance.guanyun.km == null ? "待補" : `${school.distance.guanyun.km} km`}</p>
             <p>{school.distance.guanyun.transport}</p>
           </div>
           <div className="route-block">
             <strong>{homes.champagne.label}</strong>
             <p>{homes.champagne.address}</p>
-            <p>距離約 {school.distance.champagne.km} km</p>
+            <p>距離約 {school.distance.champagne.km == null ? "待補" : `${school.distance.champagne.km} km`}</p>
             <p>{school.distance.champagne.transport}</p>
           </div>
           <p className="note-text">{school.pickupNotes}</p>
@@ -80,6 +80,10 @@ export function DetailPage() {
         <div className="detail-card">
           <h2>基本資訊</h2>
           <dl className="detail-list">
+            <div>
+              <dt>電話</dt>
+              <dd>{school.phone || "待補"}</dd>
+            </div>
             <div>
               <dt>上下課時間</dt>
               <dd>{school.schoolHours}</dd>
