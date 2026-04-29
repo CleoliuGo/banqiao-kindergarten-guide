@@ -18,6 +18,25 @@ const TYPE_MAP = {
   "07": { type: "nonprofit", typeLabel: "非營利" },
 };
 
+function estimateTransport(km) {
+  const scooterMin = Math.max(5, Math.round(km * 3.5));
+  const walkMin = Math.max(12, Math.round(km * 13));
+  return `騎車約 ${scooterMin} 分鐘，步行約 ${walkMin} 分鐘；仍建議用上下學時段導航再確認。`;
+}
+
+function makeDistance(guanyunKm, champagneKm) {
+  return {
+    guanyun: {
+      km: guanyunKm,
+      transport: estimateTransport(guanyunKm),
+    },
+    champagne: {
+      km: champagneKm,
+      transport: estimateTransport(champagneKm),
+    },
+  };
+}
+
 const manualDetails = [
   {
     name: "新北市板橋區板橋國民小學附設幼兒園",
@@ -151,16 +170,16 @@ const manualDetails = [
   },
   {
     name: "新北市大觀非營利幼兒園",
-    address: "新北市板橋區大觀路一段30號",
+    address: "新北市板橋區僑中一街1號1樓",
     rating: 4.6,
     distance: {
       guanyun: {
-        km: 1.3,
-        transport: "騎車約 6 分鐘，步行約 18 至 20 分鐘。",
+        km: 4.4,
+        transport: "騎車約 15 分鐘，步行偏遠，較適合機車或汽車接送。",
       },
       champagne: {
-        km: 2.1,
-        transport: "騎車約 8 分鐘，路線單純，接送相對好安排。",
+        km: 3.8,
+        transport: "騎車約 13 分鐘，若有固定接送人力可納入考慮。",
       },
     },
     schoolHours: "通常為日間托育，延托安排需看年度公告。",
@@ -177,16 +196,16 @@ const manualDetails = [
   },
   {
     name: "新北市新月非營利幼兒園",
-    address: "新北市板橋區中山路二段255巷72號",
+    address: "新北市板橋區中正路437號1樓",
     rating: 4.5,
     distance: {
       guanyun: {
-        km: 2.8,
-        transport: "騎車約 10 分鐘，若走主要道路接送較穩定。",
+        km: 2.3,
+        transport: "騎車約 8 分鐘，走中正路主線接送相對穩定。",
       },
       champagne: {
-        km: 2.4,
-        transport: "騎車約 9 分鐘，步行不算近，建議機車接送。",
+        km: 1.9,
+        transport: "騎車約 7 分鐘，屬可穩定接送的中近距離。",
       },
     },
     schoolHours: "通常為日間托育時段。",
@@ -203,16 +222,16 @@ const manualDetails = [
   },
   {
     name: "新北市柏翠非營利幼兒園",
-    address: "新北市板橋區溪頭街121號",
+    address: "新北市板橋區華江一路150號",
     rating: 4.4,
     distance: {
       guanyun: {
-        km: 4.2,
-        transport: "騎車約 15 分鐘，對南雅南路出發屬較遠選項。",
+        km: 5.0,
+        transport: "騎車約 17 分鐘，對南雅南路出發屬偏遠選項。",
       },
       champagne: {
-        km: 3.7,
-        transport: "騎車約 13 分鐘，若有長輩協助接送可考慮。",
+        km: 4.2,
+        transport: "騎車約 15 分鐘，較適合有長輩協助或固定汽車接送。",
       },
     },
     schoolHours: "日間托育為主。",
@@ -229,16 +248,16 @@ const manualDetails = [
   },
   {
     name: "新北市翠中非營利幼兒園",
-    address: "新北市板橋區文化路二段346號",
+    address: "新北市板橋區松江街63號1樓",
     rating: 4.3,
     distance: {
       guanyun: {
-        km: 4.6,
-        transport: "騎車約 16 分鐘，文化路沿線高峰較擁擠。",
+        km: 4.7,
+        transport: "騎車約 16 分鐘，文化路與松江街一帶尖峰較擁擠。",
       },
       champagne: {
         km: 4.0,
-        transport: "騎車約 14 分鐘，捷運轉步行可行但接送較累。",
+        transport: "騎車約 14 分鐘，若走橋邊路線接送較穩定。",
       },
     },
     schoolHours: "日間托育。",
@@ -252,6 +271,111 @@ const manualDetails = [
       "若抽中後能否持續至少一年以上穩定接送。",
     ],
     sourceNote: "評價屬非官方整理。",
+  },
+  {
+    name: "新北市立重慶國民中學附設幼兒園",
+    address: "新北市板橋區國慶路221號",
+    distance: makeDistance(2.7, 2.0),
+  },
+  {
+    name: "新北市立江翠國民中學附設幼兒園",
+    address: "新北市板橋區松江街63-2號",
+    distance: makeDistance(4.7, 4.0),
+  },
+  {
+    name: "新北市立新埔國民中學附設幼兒園",
+    address: "新北市板橋區新海路181號",
+    distance: makeDistance(4.3, 3.6),
+  },
+  {
+    name: "新北市立溪崑國民中學附設幼兒園",
+    address: "新北市板橋區大觀路三段50巷30號",
+    distance: makeDistance(4.8, 4.1),
+  },
+  {
+    name: "新北市立忠孝國民中學附設幼兒園",
+    address: "新北市板橋區重慶路168號",
+    distance: makeDistance(2.1, 1.5),
+  },
+  {
+    name: "新北市板橋區國光國民小學附設幼兒園",
+    address: "新北市板橋區中正路325巷30號",
+    distance: makeDistance(1.7, 2.0),
+  },
+  {
+    name: "新北市板橋區新埔國民小學附設幼兒園",
+    address: "新北市板橋區陽明街206號",
+    distance: makeDistance(4.1, 3.4),
+  },
+  {
+    name: "新北市板橋區埔墘國民小學附設幼兒園",
+    address: "新北市板橋區永豐街42之8號",
+    distance: makeDistance(2.1, 1.8),
+  },
+  {
+    name: "新北市板橋區莒光國民小學附設幼兒園",
+    address: "新北市板橋區莒光路163號",
+    distance: makeDistance(3.5, 2.9),
+  },
+  {
+    name: "新北市板橋區後埔國民小學附設幼兒園",
+    address: "新北市板橋區重慶路157號",
+    distance: makeDistance(2.0, 1.4),
+  },
+  {
+    name: "新北市板橋區文聖國民小學附設幼兒園",
+    address: "新北市板橋區文聖街86號",
+    distance: makeDistance(4.3, 3.6),
+  },
+  {
+    name: "新北市板橋區沙崙國民小學附設幼兒園",
+    address: "新北市板橋區篤行路二段132號",
+    distance: makeDistance(5.4, 4.6),
+  },
+  {
+    name: "新北市板橋區文德國民小學附設幼兒園",
+    address: "新北市板橋區英士路179號",
+    distance: makeDistance(4.0, 3.3),
+  },
+  {
+    name: "新北市板橋區中山國民小學附設幼兒園",
+    address: "新北市板橋區大觀路二段59巷31號",
+    distance: makeDistance(2.0, 2.7),
+  },
+  {
+    name: "新北市板橋區大觀國民小學附設幼兒園",
+    address: "新北市板橋區大觀路一段30號",
+    distance: makeDistance(1.3, 2.1),
+  },
+  {
+    name: "新北市板橋區溪洲國民小學附設幼兒園",
+    address: "新北市板橋區金門街289號",
+    distance: makeDistance(5.0, 4.2),
+  },
+  {
+    name: "新北市板橋區信義國民小學附設幼兒園",
+    address: "新北市板橋區四川路二段245巷60號",
+    distance: makeDistance(3.2, 2.5),
+  },
+  {
+    name: "新北市板橋區重慶國民小學附設幼兒園",
+    address: "新北市板橋區廣和街31號",
+    distance: makeDistance(2.5, 1.9),
+  },
+  {
+    name: "新北市立板橋幼兒園 新民分班",
+    address: "新北市板橋區懷德街235巷2號",
+    distance: makeDistance(3.0, 2.7),
+  },
+  {
+    name: "新北市立板橋幼兒園 和平分班",
+    address: "新北市板橋區重慶路355號",
+    distance: makeDistance(2.8, 2.1),
+  },
+  {
+    name: "新北市永翠非營利幼兒園",
+    address: "新北市板橋區香社一路56號",
+    distance: makeDistance(5.6, 4.9),
   },
   {
     name: "新北市私立大同幼兒園",
