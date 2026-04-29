@@ -11,6 +11,37 @@ const homes = {
 
 export const kindergartens = [
   {
+    slug: "banqiao-elementary-kindergarten",
+    name: "新北市板橋區板橋國民小學附設幼兒園",
+    type: "public",
+    vacancy: "3-5歲班 66",
+    address: "新北市板橋區文化路一段23號",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=新北市板橋區板橋國民小學附設幼兒園",
+    rating: 4.5,
+    closestHome: { label: "觀雲家" },
+    distance: {
+      guanyun: {
+        km: 1.1,
+        transport: "騎車約 5 分鐘，步行約 14 至 16 分鐘，接送動線相對直觀。",
+      },
+      champagne: {
+        km: 1.8,
+        transport: "騎車約 7 分鐘，若由香檳家出發也屬於可穩定接送的近距離。",
+      },
+    },
+    schoolHours: "約 08:00-16:00，延托與課後安排需向園方確認。",
+    tuition: "公立收費，整體負擔低，午餐與其他代辦項目另計。",
+    teachingModel: "校園附幼型態，作息穩定，適合優先考量接送便利與公立資源的家庭。",
+    pickupNotes: "文化路一段周邊機車接送便利度不錯，但上下學尖峰仍要預留等候時間。",
+    pickSummary: "以南雅南路兩個出發點來看，這間應屬最值得放前段志願的近距離公立附幼之一。",
+    parentChecklist: [
+      "確認實際接送門口與臨停位置，而不是只看學校正門地址。",
+      "問清楚延托、寒暑假與請假退費規則。",
+      "若重視戶外空間，實地看一次活動場域大小與動線。",
+    ],
+    sourceNote: "地址參考幼兒園公開資訊站；缺額以 2026-04-29 新北幼生登記平台公開資料整理。",
+  },
+  {
     slug: "banqiao-municipal-kindergarten",
     name: "新北市立板橋幼兒園",
     type: "public",
